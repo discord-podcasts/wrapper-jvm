@@ -5,6 +5,6 @@ enum class PacketType(val raw: Byte) {
     AUDIO(1);
 
     companion object {
-        fun fromCode(byte: Byte): PacketType = values().first { it.raw == byte }
+        fun fromCode(byte: Byte): PacketType = values().firstOrNull() { it.raw == byte } ?: throw IllegalStateException("Unexpected byte $byte")
     }
 }
