@@ -9,7 +9,7 @@ data class Podcast(
     val activeSince: Long?
 ) {
 
-    suspend fun connect(options: ConnectionOptions.() -> Unit):PodcastConnection {
+    suspend fun connect(options: ConnectionOptions.() -> Unit = {}):PodcastConnection {
         return Podcasts.connect(this, ConnectionOptions().apply(options))
     }
 
