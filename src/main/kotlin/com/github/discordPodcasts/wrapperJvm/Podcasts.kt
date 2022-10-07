@@ -32,6 +32,12 @@ object Podcasts {
     }
     internal val json = Json
 
+    suspend fun list(): List<Podcast> {
+        val req = httpClient.get("$restEndpoint/list")
+        if (req.status != HttpStatusCode.OK) throw Exception(req.bodyAsText())
+        else return json.decodeFromString(req.bodyAsText())
+    }
+
     suspend fun create(): Podcast {
         val req = httpClient.post("$restEndpoint/podcast")
         if (req.status != HttpStatusCode.OK) throw Exception(req.bodyAsText())
