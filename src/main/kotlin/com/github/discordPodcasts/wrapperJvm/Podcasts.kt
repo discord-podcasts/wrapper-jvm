@@ -21,6 +21,8 @@ object Podcasts {
     internal var token = ""
     internal val coroutineScope = CoroutineScope(ForkJoinPool.commonPool().asCoroutineDispatcher())
     private val endpoint = "podcasts.myra.bot"
+    private val restEndpoint = "https://$endpoint"
+    private val wsEndpoint = "wss://$endpoint"
     private val httpClient = HttpClient(CIO) {
         install(WebSockets)
         defaultRequest {
@@ -31,13 +33,13 @@ object Podcasts {
     internal val json = Json
 
     suspend fun create(): Podcast {
-        val req = httpClient.post("$endpoint/podcast")
+        val req = httpClient.post("$restEndpoint/podcast")
         if (req.status != HttpStatusCode.OK) throw Exception(req.bodyAsText())
         else return json.decodeFromString(req.bodyAsText())
     }
 
     suspend fun connect(podcast: Podcast, options: ConnectionOptions): PodcastConnection {
-        val session = httpClient.webSocketSession("wss://$endpoint") {
+        val session = httpClient.webSocketSession(wsEndpoint) {
             parameter("id", podcast.id)
             header("isSender", options.isSender)
         }
