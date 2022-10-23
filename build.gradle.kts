@@ -24,6 +24,7 @@ repositories {
 dependencies {
     implementation("io.ktor:ktor-client-core:$ktor")
     implementation("io.ktor:ktor-client-cio:$ktor")
+    implementation("io.ktor:ktor-client-websockets:$ktor")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerialization") // Json serialization
     implementation("com.codahale:xsalsa20poly1305:0.11.0") // Encryption / Decryption

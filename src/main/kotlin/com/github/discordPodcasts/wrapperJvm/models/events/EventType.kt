@@ -12,6 +12,8 @@ import kotlinx.serialization.encoding.Encoder
 enum class EventType(val identifier: Short) {
     HELLO(0),
     DISCONNECT(1),
+    FIND_ADDRESS(2),
+    READY(3),
     UNKNOWN(-1);
 
     internal object Serializer : KSerializer<EventType> {

@@ -18,7 +18,8 @@ data class Podcast(
 
     suspend fun getConnectionOrCreate(options: ConnectionOptions.() -> Unit = {}): PodcastConnection {
         val options = ConnectionOptions().apply(options)
-        return Podcasts.getConnection(this, options)?.also { println("Reused connection") } ?: Podcasts.createConnection(this, options).also { println("Created connection") }
+        return Podcasts.getConnection(this, options)
+            ?: Podcasts.createConnection(this, options)
     }
 
 }
