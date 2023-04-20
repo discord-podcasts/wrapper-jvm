@@ -13,12 +13,6 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven(url = "https://systems.myra.bot/releases/") {
-        credentials {
-            username = property("REPO_NAME")?.toString()
-            password = property("REPO_SECRET")?.toString()
-        }
-    }
 }
 
 dependencies {
@@ -29,7 +23,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerialization") // Json serialization
     implementation("com.codahale:xsalsa20poly1305:0.11.0") // Encryption / Decryption
 
-    testImplementation("bot.myra", "Diskord", "2.81")
     testImplementation(kotlin("reflect"))
     testImplementation("org.reflections:reflections:0.10.2")
 }
