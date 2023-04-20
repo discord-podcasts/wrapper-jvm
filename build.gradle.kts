@@ -32,7 +32,6 @@ dependencies {
     testImplementation("bot.myra", "Diskord", "2.81")
     testImplementation(kotlin("reflect"))
     testImplementation("org.reflections:reflections:0.10.2")
-    testImplementation("bot.myra:kommons:1")
 }
 
 tasks.withType<KotlinCompile> {
