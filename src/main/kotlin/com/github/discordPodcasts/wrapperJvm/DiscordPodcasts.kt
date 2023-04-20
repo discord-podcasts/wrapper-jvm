@@ -1,19 +1,21 @@
 package com.github.discordPodcasts.wrapperJvm
 
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
+import com.github.discordPodcasts.wrapperJvm.entities.Podcast
+import com.github.discordPodcasts.wrapperJvm.entities.Podcasts
 
 @Suppress("unused")
 class DiscordPodcasts(
-    private val clientId: Long,
-    private val clientSecret: String
+    clientId: Long,
+    clientSecret: String
 ) {
-    val httpClient = HttpClient(CIO) {
-        defaultRequest {
-            header("client_id", clientId)
-            header("client_secret", clientSecret)
-        }
+    private val restClient = RestClient(clientId, clientSecret)
+
+    suspend fun getPodcast(id: String): Podcast {
+        return restClient.execute("/podcasts?id=${id}")
     }
+
+    suspend fun listPodcasts(): Podcasts {
+        return restClient.execute("/list")
+    }
+
 }
